@@ -1,7 +1,7 @@
 Feature: Spring api controller bdd
 
   Background:
-    Given baseUri is https://mfwkweb-api.clarovideo.net/services/content/serie?device_id=web&device_category=web&device_model=web&device_type=web&device_so=Chrome&format=json&device_manufacturer=generic&authpn=webclient&authpt=tfg1h3j4k6fd7&api_version=v5.91&region=mexico&HKS=web5f4d1cc9c283d&user_id=49270567&group_id=898508
+    Given baseUri is http://localhost:8080
 
   Scenario: Should test header
     When I GET /all
