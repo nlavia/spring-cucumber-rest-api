@@ -3,6 +3,7 @@ package fr.redfroggy.test.bdd.glue;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,13 +25,13 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * First step is to retrieve the base uri
      * @param uri base uri
      */
-    @Given("^baseUri is (.*)$")
+	@Given("^el Endpoint (.*)$")
     public void baseUri(String uri) {
         Assert.notNull(uri);
         Assert.isTrue(!uri.isEmpty());
         baseUri = uri;
     }
-
+    
     /**
      * Set the request body
      * A json string structure is accepted
@@ -78,9 +79,10 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * The trailing slash is checked, so the value can be "/resource" or "resource"
      * @param resource resource name
      */
-    @When("^I GET (.*)$")
+    @When("^Realizo GET (.*)$")
     public void get(String resource) {
         this.request(resource, HttpMethod.GET);
+  
     }
 
     /**
@@ -157,7 +159,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * Test response status code is equal to a given status
      * @param status status code to test
      */
-    @Then("^response code should be (\\d+)$")
+    @Then("^obtengo codigo de respuesta (\\d+)$")
     public void responseCode(Integer status) {
         this.checkStatus(status, false);
     }
@@ -224,7 +226,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * @param bodyValue value which the body must contain
      * @throws IOException json parse exception
      */
-    @Then("^response body should contain (.*)$")
+    @Then("^el cuerpo de la respuesta debe contener (.*)$")
     public void bodyContains(String bodyValue) throws IOException {
         this.checkBodyContains(bodyValue);
     }
@@ -234,7 +236,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * @param jsonPath json path query
      * @throws IOException json parse exception
      */
-    @Then("^response body path (.*) should exists$")
+    @Then("^el cuerpo de la respuesta (.*) debe existir$")
     public void bodyPathExists(String jsonPath) throws IOException {
         this.checkJsonPathExists(jsonPath);
     }
@@ -245,7 +247,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * @param value expected value
      * @throws IOException json parse exception
      */
-    @Then("^response body path (.*) should be (.*)$")
+    @Then("^el cuerpo de la respuesta (.*) debe contener (.*)$")
     public void bodyPathEqual(String jsonPath, String value) throws IOException {
         this.checkJsonPath(jsonPath, value, false);
     }

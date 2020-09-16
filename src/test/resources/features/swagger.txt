@@ -1,7 +1,7 @@
 Feature: Swagger petstore api bdd
 
   Background:
-    Given baseUri is http://petstore.swagger.io/v2
+    Given el Endpoint http://petstore.swagger.io/v2
 
   Scenario: Get root document
     Given I set Accept header to application/json
@@ -11,8 +11,8 @@ Feature: Swagger petstore api bdd
     And I set headers to:
       | name   | value  |
       | lang  | fr  |
-    When I GET /swagger.json
-    Then response code should be 200
+    When Realizo GET /swagger.json
+    Then espero codigo de respuesta 200
     And response code should not be 401
     And response header Content-Type should exist
     And response header X-CSRF-TOKEN should not exist
@@ -32,7 +32,7 @@ Feature: Swagger petstore api bdd
     And I set Content-Type header to application/json
     And I set body to {"category": {"id": 0,"name": "string"},"name": "doggie","photoUrls": ["string"],"tags": [{"id": 0,"name": "string"}],"status": "available"}
     When I POST /pet
-    Then response code should be 200
+    Then espero codigo de respuesta 200
     And response header Content-Type should exist
     And response body should be valid json
     And response body path $.id should exists
