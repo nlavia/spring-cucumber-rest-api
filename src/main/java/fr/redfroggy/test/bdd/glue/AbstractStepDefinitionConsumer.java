@@ -236,11 +236,18 @@ abstract class AbstractStepDefinitionConsumer {
         Object pathValue = checkJsonPathExists(jsonPath);
         Assert.isTrue(!String.valueOf(pathValue).isEmpty());
 
-        if(!isNot) {
-            Assert.isTrue(pathValue.equals(jsonValue));
-        } else {
-            Assert.isTrue(!pathValue.equals(jsonValue));
-        }
+        String pathString = new String();
+        pathString = pathValue.toString();
+       // Assert.isTrue(!"[]".contentEquals(pathString));
+
+        
+        Assert.isTrue(pathString.equals(jsonValue));
+        
+//        if(!isNot) {
+//            Assert.isTrue(pathValue.equals(pathString));
+//        } else {
+//            Assert.isTrue(!pathValue.equals(pathString));
+//        }
     }
 
     /**
@@ -327,6 +334,9 @@ abstract class AbstractStepDefinitionConsumer {
         Object pathValue = ctx.read(jsonPath);
 
         Assert.notNull(pathValue);
+        String pathString = new String();
+        pathString = pathValue.toString();
+        Assert.isTrue(!"[]".contentEquals(pathString));
 
         return pathValue;
     }
