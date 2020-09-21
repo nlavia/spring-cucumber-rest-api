@@ -297,6 +297,12 @@ abstract class AbstractStepDefinitionConsumer {
 
         Object pathValue = getJsonPath(jsonPath);
         scenarioScope.getJsonPaths().put(jsonPathAlias, pathValue);
+        
+        String scenarioScopeValue = new String();
+        scenarioScopeValue =   pathValue.toString();
+        System.out.print(scenarioScopeValue);
+
+        
     }
 
     /**
@@ -307,6 +313,11 @@ abstract class AbstractStepDefinitionConsumer {
     void checkScenarioVariable(String property, String value){
         Assert.isTrue(scenarioScope.checkProperty(property, value));
     }
+    
+    void returnScenarioVariable(String property, String value){
+        scenarioScope.checkProperty(property, value);
+    }
+
 
     /**
      * Parse the http response json body

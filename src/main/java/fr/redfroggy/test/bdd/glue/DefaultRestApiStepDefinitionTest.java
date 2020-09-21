@@ -1,8 +1,10 @@
 package fr.redfroggy.test.bdd.glue;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import fr.redfroggy.test.bdd.scope.ScenarioScope;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
@@ -10,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,11 +82,90 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
      * The trailing slash is checked, so the value can be "/resource" or "resource"
      * @param resource resource name
      */
-    @When("^Realizo GET (.*)$")
+    @When("^Cuando Realizo GET (.*)$")
     public void get(String resource) {
         this.request(resource, HttpMethod.GET);
-  
+
     }
+    
+    @When("^Realizo GET de /services/nav/data con parametros$")
+    public void co(DataTable parameters ) {
+   	
+    	String resource = new String();
+    	resource = "/services/nav/data?";
+    	
+    	 List<Map<String, String>> list = parameters.asMaps(String.class, String.class);
+
+		resource = resource + "device_category" 		  + "=" + list.get(0).get("device_category");
+		resource = resource + "&" + "device_model" 		  + "=" + list.get(0).get("device_model");
+		resource = resource + "&" + "device_type" 		  + "=" + list.get(0).get("device_type");
+		resource = resource + "&" + "device_manufacturer" + "=" + list.get(0).get("device_manufacturer");
+		resource = resource + "&" + "region" 			  + "=" + list.get(0).get("region");
+		resource = resource + "&" + "api_version"         + "=" + list.get(0).get("api_version");
+		resource = resource + "&" + "format"              + "=" + list.get(0).get("format");
+		resource = resource + "&" + "authpn"              + "=" + list.get(0).get("authpn");
+		resource = resource + "&" + "authpt"              + "=" + list.get(0).get("authpt");
+		resource = resource + "&" + "HKS"                 + "=" + list.get(0).get("HKS");
+		resource = resource + "&" + "tenant_code"         + "=" + list.get(0).get("tenant_code");
+		resource = resource + "&" + "type"                + "=" + list.get(0).get("type");
+    	this.request(resource, HttpMethod.GET);
+
+    }
+    
+    @When("^Realizo GET de /services/cms/level con parametros$")
+    public void get_cms_level_with_params(DataTable parameters ) {
+   	
+    	String resource = new String();
+    	resource = "/services/cms/level?";
+    	
+    	 List<Map<String, String>> list = parameters.asMaps(String.class, String.class);
+    	resource = resource + "device_category" 		  + "=" + list.get(0).get("device_category");
+		resource = resource + "&" + "device_model" 		  + "=" + list.get(0).get("device_model");
+		resource = resource + "&" + "device_type" 		  + "=" + list.get(0).get("device_type");
+		resource = resource + "&" + "device_manufacturer" + "=" + list.get(0).get("device_manufacturer");
+		resource = resource + "&" + "authpn" 			  + "=" + list.get(0).get("authpn");
+		resource = resource + "&" + "authpt"        	  + "=" + list.get(0).get("authpt");
+		resource = resource + "&" + "cache"               + "=" + list.get(0).get("cache");
+		resource = resource + "&" + "format"              + "=" + list.get(0).get("format");
+		resource = resource + "&" + "HKS"             	  + "=" + list.get(0).get("HKS");
+		resource = resource + "&" + "isCacheable"         + "=" + list.get(0).get("isCacheable");
+		resource = resource + "&" + "tenant_code"         + "=" + list.get(0).get("tenant_code");
+		resource = resource + "&" + "type"                + "=" + list.get(0).get("type");
+		resource = resource + "&" + "node"                + "=" + list.get(0).get("node");
+		resource = resource + "&" + "api_version"         + "=" + list.get(0).get("api_version");
+		resource = resource + "&" + "region"              + "=" + list.get(0).get("region");
+    	this.request(resource, HttpMethod.GET);
+
+    }
+    
+    @When("^Realizo GET de /services/cms/carrousel con parametros$")
+    public void get_cms_carrusel_with_params(DataTable parameters ) {
+   	
+    	 	
+    	
+    	String resource = new String();
+    	resource = "/services/cms/carrousel?";
+    	List<Map<String, String>> list = parameters.asMaps(String.class, String.class);
+    	resource = resource + "device_category" 		  + "=" + list.get(0).get("device_category");
+		resource = resource + "&" + "device_model" 		  + "=" + list.get(0).get("device_model");
+		resource = resource + "&" + "device_type" 		  + "=" + list.get(0).get("device_type");
+		resource = resource + "&" + "device_manufacturer" + "=" + list.get(0).get("device_manufacturer");
+		resource = resource + "&" + "order_way" 		  + "=" + list.get(0).get("order_way");
+		resource = resource + "&" + "order_id"        	  + "=" + list.get(0).get("order_id");
+		
+//		resource = valueScenarioScope.this
+//		this.checkScenarioVariable(property, list.get(0).get("filter_id"));
+		
+		resource = resource + "&" + "filter_id"           + "=" + list.get(0).get("filter_id");
+		resource = resource + "&" + "region"              + "=" + list.get(0).get("region");
+		resource = resource + "&" + "format"              + "=" + list.get(0).get("format");
+		resource = resource + "&" + "authpn"              + "=" + list.get(0).get("authpn");
+		resource = resource + "&" + "authpt"              + "=" + list.get(0).get("authpt");
+		resource = resource + "&" + "api_version"         + "=" + list.get(0).get("api_version");
+		resource = resource + "&" + "quantity"            + "=" + list.get(0).get("quantity");
+    	this.request(resource, HttpMethod.GET);
+    }
+    
 
     /**
      * Perform an HTTP POST request. It supposes that a body exists,
@@ -222,9 +304,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     }
 
     /**
-     * Test if the response body contains a given value
-     * @param bodyValue value which the body must contain
-     * @throws IOException json parse exception
+     Contains en bodyValue
      */
     @Then("^el cuerpo de la respuesta debe contener (.*)$")
     public void bodyContains(String bodyValue) throws IOException {
@@ -232,9 +312,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     }
 
     /**
-     * Test the given json path query exists in the response body
-     * @param jsonPath json path query
-     * @throws IOException json parse exception
+	Json path existe
      */
     @Then("^el cuerpo de la respuesta (.*) debe existir$")
     public void bodyPathExists(String jsonPath) throws IOException {
@@ -242,10 +320,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     }
 
     /**
-     * Test the given json path exists in the response body and match the given value
-     * @param jsonPath json path query
-     * @param value expected value
-     * @throws IOException json parse exception
+   Json path value igual al especificado
      */
     @Then("^el cuerpo de la respuesta (.*) debe contener (.*)$")
     public void bodyPathEqual(String jsonPath, String value) throws IOException {
@@ -310,6 +385,8 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     @Then("^I store the value of body path (.*) as (.*) in scenario scope$")
     public void storeResponseJsonPath(String jsonPath, String jsonPathAlias) throws IOException {
         this.storeJsonPath(jsonPath, jsonPathAlias);
+        
+ 
     }
 
     /**
