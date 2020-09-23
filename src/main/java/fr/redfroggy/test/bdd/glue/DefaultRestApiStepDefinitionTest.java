@@ -77,15 +77,24 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     }
 
     /**
-     * Perform an HTTP GET request
-     * Url will be baseUri+resource
-     * The trailing slash is checked, so the value can be "/resource" or "resource"
-     * @param resource resource name
-     */
-    @When("^Cuando Realizo GET (.*)$")
-    public void get(String resource) {
-        this.request(resource, HttpMethod.GET);
-
+     *  Se envia la url y una tabla de parametros para armar el link sobre el que se realizara el GET
+     **/
+    
+    @When("^Cuando Realizo GET de (.*)$")
+    public void get(String url, DataTable dt) {
+    	List<List<String>> list = dt.asLists(String.class);
+    	
+    	String resource = new String();
+    	//resource = resource + list.get(0).get(1) + "?";
+			
+    	for(int i=0; i<list.size(); i++) { 
+    		
+        resource = resource + list.get(i).get(0) + "=" + list.get(i).get(1)+"&";
+    	}
+  	 	
+    	url = url +"?" +resource.substring(0, resource.length()-1); 
+        this.request(url, HttpMethod.GET);
+        System.out.print(url);
     }
     
     @When("^Realizo GET de /services/nav/data con parametros$")
@@ -108,7 +117,9 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 		resource = resource + "&" + "HKS"                 + "=" + list.get(0).get("HKS");
 		resource = resource + "&" + "tenant_code"         + "=" + list.get(0).get("tenant_code");
 		resource = resource + "&" + "type"                + "=" + list.get(0).get("type");
-    	this.request(resource, HttpMethod.GET);
+    	
+		
+		this.request(resource, HttpMethod.GET);
 
     }
     
@@ -142,7 +153,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     public void get_cms_carrusel_with_params(DataTable parameters ) {
    	
     	 	
-    	
+    	String variable = new String();
     	String resource = new String();
     	resource = "/services/cms/carrousel?";
     	List<Map<String, String>> list = parameters.asMaps(String.class, String.class);
@@ -153,10 +164,12 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 		resource = resource + "&" + "order_way" 		  + "=" + list.get(0).get("order_way");
 		resource = resource + "&" + "order_id"        	  + "=" + list.get(0).get("order_id");
 		
-//		resource = valueScenarioScope.this
-//		this.checkScenarioVariable(property, list.get(0).get("filter_id"));
-		
-		resource = resource + "&" + "filter_id"           + "=" + list.get(0).get("filter_id");
+		variable = this.returnScenarioVariable("url");
+		variable = variable.substring(variable.indexOf("filter_id") + 10);
+		variable = variable.substring(0, variable.indexOf("&"));
+		resource = resource + "&" + "filter_id"           + "=" + variable;
+			
+		//resource = resource + "&" + "filter_id"           + "=" + list.get(0).get("filter_id");
 		resource = resource + "&" + "region"              + "=" + list.get(0).get("region");
 		resource = resource + "&" + "format"              + "=" + list.get(0).get("format");
 		resource = resource + "&" + "authpn"              + "=" + list.get(0).get("authpn");
@@ -374,15 +387,9 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     }
 
     /**
-     * Store a given json path value to the scenario scope
-     * The purpose is to reuse its value in another scenario
-     * The most common use case is the authentication process
-     * @see fr.redfroggy.test.bdd.scope.ScenarioScope
-     * @param jsonPath json path query
-     * @param jsonPathAlias json path alias (which will be stored in the scenario scope)
-     * @throws IOException json parse exception
+   	 *	Guardo la respuesta en el una variable de escenario
      */
-    @Then("^I store the value of body path (.*) as (.*) in scenario scope$")
+    @Then("^almaceno la respuesta de (.*) como (.*) en variable de escenario$")
     public void storeResponseJsonPath(String jsonPath, String jsonPathAlias) throws IOException {
         this.storeJsonPath(jsonPath, jsonPathAlias);
         
@@ -390,11 +397,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
     }
 
     /**
-     * Test a scenario scope variable value match the expected one
-     * @see fr.redfroggy.test.bdd.scope.ScenarioScope
-     * @param property scenario scope property
-     * @param value expected property value
-     * @throws IOException json parse exception
+     * Valido la variable de escenario*
      */
     @Then("^value of scenario variable (.*) should be (.*)$")
     public void scenarioVariableIsValid(String property, String value) throws IOException {

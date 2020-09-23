@@ -43,4 +43,14 @@ public class ScenarioScope {
 
         return isHeader || isJsonPath;
     }
+    
+    public String checkVariable(String property) {
+     //   Object headerValue = headers.get(property);
+        Object jsonPathValue = jsonPaths.get(property);
+       String value = new String();
+        value = jsonPathValue.toString();
+     //   boolean isJsonPath = jsonPathValue != null && jsonPathValue.equals(value);
+
+        return value;
+    }
 }

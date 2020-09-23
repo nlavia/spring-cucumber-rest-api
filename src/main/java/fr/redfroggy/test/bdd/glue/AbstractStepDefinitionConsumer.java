@@ -314,8 +314,8 @@ abstract class AbstractStepDefinitionConsumer {
         Assert.isTrue(scenarioScope.checkProperty(property, value));
     }
     
-    void returnScenarioVariable(String property, String value){
-        scenarioScope.checkProperty(property, value);
+    String returnScenarioVariable(String property){
+        return scenarioScope.checkVariable(property);
     }
 
 
