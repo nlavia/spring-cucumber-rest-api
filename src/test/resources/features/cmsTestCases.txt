@@ -39,7 +39,7 @@ Scenario: #1 Se invoca al servicio /services/nav/ y se valida que devuelva la es
 	And el cuerpo de la respuesta .response.nodes[0].status debe existir 
 	And el cuerpo de la respuesta .response.nodes[0].app_behaviour debe existir 
 	
-	
+
 Scenario: #2 Se invoca al servicio /services/cms/level y se valida que devuelva carruseles. 
 
 	When Cuando Realizo GET de /services/cms/level
@@ -60,6 +60,8 @@ Scenario: #2 Se invoca al servicio /services/cms/level y se valida que devuelva 
 		|region				|mexico                    |
 		
 	Then obtengo codigo de respuesta 200 
+	
+	And el cuerpo de la respuesta .response.modules.module[0].name debe existir 
 	And el cuerpo de la respuesta .response.modules.module[0].name debe contener ["Superdestacados"] 
 	And el cuerpo de la respuesta .response.modules.module[1].name debe contener ["Continua-viendo"] 
 	And el cuerpo de la respuesta .response.modules.module[2].name debe contener ["Lo-Mejor"] 
@@ -67,51 +69,37 @@ Scenario: #2 Se invoca al servicio /services/cms/level y se valida que devuelva 
 	And el cuerpo de la respuesta .response.modules.module[4].name debe contener ["Lo-mas-visto"] 
 	
 	
-@wip @current
+@wip 
 Scenario: #3 Se invoca al servicio /services/cms/carrousel
 
 	When Cuando Realizo GET de /services/cms/level
-		|device_category		| web	  |
-		|device_model			| web	  |
-		|device_type			| web	  |
-		|device_manufacturer    |generic  |
-		|authpn					|webclient|
-		|authpt					|tfg1h3j4k6fd7|
-		|cache					|refresh  |
-		|format					|json     |
-		|HKS					|03nevr0ti0l7bqcufpi0o9bch3|
-		|isCacheable			|true     |
-		|tenant_code			|clarovideo|
-		|type					|nav|
-		|node					|pandg_noggin|
-		|api_version			|v5.92|
-		|region					|mexico|
+		|device_category		|web	  					|
+		|device_model			|web	  					|
+		|device_type			|web	  					|
+		|device_manufacturer    |generic  					|
+		|authpn					|webclient					|
+		|authpt					|tfg1h3j4k6fd7				|
+		|cache					|refresh  					|
+		|format					|json     					|
+		|HKS					|03nevr0ti0l7bqcufpi0o9bch3 |
+		|isCacheable			|true     					|
+		|tenant_code			|clarovideo					|
+		|type					|nav						|
+		|node					|pandg_noggin				|
+		|api_version			|v5.92						|
+		|region					|mexico						|
 		
-		Then obtengo codigo de respuesta 200 
-	And I store the value of bod.y path .response.modules.module[2].components.component[2].properties.url as url in scenario scope 
-	And Realizo GET de /services/cms/carrousel con parametros 
-		|device_category|device_model|device_type|device_manufacturer|order_way|order_id|filter_id|region|format|authpn	  |authpt		|api_version| quantity|
-		|web			|web		 |web		 |generic			 |ASC	   |50		|url      |mexico|json  |webclient|tfg1h3j4k6fd7|6			|499	  |
 	Then obtengo codigo de respuesta 200 
-	
- 
-Scenario: #4
+	And almaceno la respuesta de .response.modules.module[2].components.component[2].properties.url como UrlVariable en variable de escenario
+	And Cuando Realizo GET de UrlVariable
+	|device_category		|web	  					|
+	|device_model			|web	  					|
+	|device_type			|web	  					|
+	|device_manufacturer    |generic  					|
+	|authpn					|amco						|
+	|authpt					|12e4i8l6a581a				|
+	Then obtengo codigo de respuesta 200 	
 
-	When Cuando Realizo GET de /services/cms/level 
-		|device_category		| web	  |
-		|device_model			| web	  |
-		|device_type			| web	  |
-		|device_manufacturer    |generic  |
-		|authpn					|webclient|
-		|authpt					|tfg1h3j4k6fd7|
-		|cache					|refresh  |
-		|format					|json     |
-		|HKS					|03nevr0ti0l7bqcufpi0o9bch3|
-		|isCacheable			|true     |
-		|tenant_code			|clarovideo|
-		|type					|nav|
-		|node					|pandg_noggin|
-		|api_version			|v5.92|
-		|region					|mexico|
-	Then obtengo codigo de respuesta 200 
+
+
 		
