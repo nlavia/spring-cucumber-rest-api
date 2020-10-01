@@ -25,10 +25,7 @@ import java.util.Map;
 public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionConsumer {
 
 	/**
-	 * First step is to retrieve the base uri
-	 * 
-	 * @param uri
-	 *            base uri
+	 * Base Uri
 	 */
 	@Given("^el Endpoint (.*)$")
 	public void baseUri(String uri) {

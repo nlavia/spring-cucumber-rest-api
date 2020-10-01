@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		tags = "@current",
-        plugin = {"pretty", "html:target/cucumber"},
+        plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"},
         features = "src/test/resources/features",
         glue = {"fr.redfroggy.test.bdd.glue"})
 public class CurrentRunner {}

@@ -227,10 +227,7 @@ abstract class AbstractStepDefinitionConsumer {
     }
 
     /**
-     * Test json path value
-     * @param jsonPath json path query
-     * @param jsonValue expected/unexpected json path value
-     * @param isNot if true, test equality, inequality if false
+     * Prueba Valor Path Value
      */
     void checkJsonPath(String jsonPath, String jsonValue, boolean isNot){
         Object pathValue = checkJsonPathExists(jsonPath);
@@ -238,16 +235,9 @@ abstract class AbstractStepDefinitionConsumer {
 
         String pathString = new String();
         pathString = pathValue.toString();
-       // Assert.isTrue(!"[]".contentEquals(pathString));
-
-        
         Assert.isTrue(pathString.equals(jsonValue));
         
-//        if(!isNot) {
-//            Assert.isTrue(pathValue.equals(pathString));
-//        } else {
-//            Assert.isTrue(!pathValue.equals(pathString));
-//        }
+
     }
 
     /**
