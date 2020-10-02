@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -120,6 +121,21 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 
 		System.out.print("\n Se envio get de :" + url);
 		this.request(url, HttpMethod.GET);
+
+	}
+
+	@When("^Valido listado de Nodos Almacenados en variable: (.*)$")
+	public void get_nodes(String nodos, DataTable dt) {
+
+		List<List<String>> list = dt.asLists(String.class);
+		
+//		List<String> nodeList = new ArrayList<String>();
+//		nodeList = this.returnScenarioVariable(nodos);
+		
+		nodos = this.returnScenarioVariable(nodos);
+
+		
+		// this.request(nodos, HttpMethod.GET);
 
 	}
 

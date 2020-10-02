@@ -64,21 +64,13 @@ Given el Endpoint <URI>
 		
 	Then obtengo codigo de respuesta 200
 	And almaceno la respuesta de .response.nodes como Nodos en variable de escenario
-	
-	And la respuesta debe ser un json valido
-	And el cuerpo de la respuesta .response.nodes debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].id debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].id_parent debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].code debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].text debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].menu_id debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].image debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].image_over debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].level debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].type debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].order debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].status debe existir 
-	And el cuerpo de la respuesta .response.nodes[0].app_behaviour debe existir	
+	And Valido listado de Nodos Almacenados en variable: Nodos
+		|device_category	|<DEVICE_CATEGORY>				  |
+		|device_model		|<DEVICE_MODEL>			  		  |
+		|device_type		|<DEVICE_TYPE>			          |
+		|device_manufacturer|<DEVICE_MANUFACTURER>	          |
+		
+
 
 Examples:
 |URI										 |DEVICE_CATEGORY|DEVICE_MANUFACTURER|DEVICE_MODEL|DEVICE_TYPE  |
