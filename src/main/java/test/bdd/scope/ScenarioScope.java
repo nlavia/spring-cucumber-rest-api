@@ -1,4 +1,4 @@
-package fr.redfroggy.test.bdd.scope;
+package test.bdd.scope;
 
 import java.util.HashMap;
 import java.util.Map;

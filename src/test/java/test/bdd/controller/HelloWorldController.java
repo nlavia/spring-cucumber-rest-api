@@ -1,4 +1,4 @@
-package fr.redfroggy.test.bdd.controller;
+package test.bdd.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

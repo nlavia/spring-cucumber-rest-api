@@ -1,4 +1,4 @@
-package fr.redfroggy.test.bdd;
+package test.bdd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

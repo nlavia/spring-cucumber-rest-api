@@ -1,4 +1,4 @@
-package fr.redfroggy.test.bdd.cucumber;
+package test.bdd.cucumber;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -9,5 +9,5 @@ import org.junit.runner.RunWith;
 		tags = "~@wip",
         plugin = {"pretty", "html:target/cucumber"},
         features = "src/test/resources/features",
-        glue = {"fr.redfroggy.test.bdd.glue"})
+        glue = {"test.bdd.glue"})
 public class CucumberTest {}

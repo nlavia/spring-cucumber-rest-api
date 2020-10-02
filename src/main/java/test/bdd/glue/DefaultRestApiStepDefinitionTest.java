@@ -1,10 +1,10 @@
-package fr.redfroggy.test.bdd.glue;
+package test.bdd.glue;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import fr.redfroggy.test.bdd.scope.ScenarioScope;
+import test.bdd.scope.ScenarioScope;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
@@ -455,7 +455,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 	 * reuse its value in another scenario The most common use case is the
 	 * authentication process
 	 * 
-	 * @see fr.redfroggy.test.bdd.scope.ScenarioScope
+	 * @see test.bdd.scope.ScenarioScope
 	 * @param headerName
 	 *            http header name
 	 * @param headerAlias

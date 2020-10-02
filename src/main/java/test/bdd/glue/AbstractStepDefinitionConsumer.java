@@ -1,9 +1,11 @@
-package fr.redfroggy.test.bdd.glue;
+package test.bdd.glue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
-import fr.redfroggy.test.bdd.scope.ScenarioScope;
+
+import test.bdd.scope.ScenarioScope;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
