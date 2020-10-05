@@ -28,12 +28,6 @@ public class ScenarioScope {
         return jsonPaths;
     }
 
-    /**
-     * Check a scenario scope variable exists and match the given value
-     * @param property property to check
-     * @param value expected value
-     * @return true if values are matching for a given property, false otherwise
-     */
     public boolean checkProperty(String property, String value) {
         Object headerValue = headers.get(property);
         boolean isHeader = headerValue != null && headerValue.equals(value);

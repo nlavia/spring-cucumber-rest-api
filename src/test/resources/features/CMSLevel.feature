@@ -38,7 +38,7 @@ Scenario Outline: #1 Se invoca al servicio /services/cms/level para HomeUser y s
 		|https://qro-microfwk-silo-stb.clarovideo.net |stb			    |coship				|n9090		  |ott        |.response.modules.module[0].components.component[0].type|["Highlight"]|.response.modules.module[1].type|["carrousel"]|.response.modules.module[1].components.component[2].type|["Carrouselhorizontal"]|
 		
 		
-@current
+
 Scenario Outline: #2 Se invoca al servicio /services/cms/level y se llama a la content list
 
 	Given el Endpoint <URI> 

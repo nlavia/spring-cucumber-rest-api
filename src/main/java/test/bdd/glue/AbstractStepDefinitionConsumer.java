@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Abstract step definition implementation
@@ -275,11 +277,7 @@ abstract class AbstractStepDefinitionConsumer {
         scenarioScope.getHeaders().put(headerAlias, headerValues);
     }
 
-    /**
-     * Store a json path value using the given alias
-     * @param jsonPath json path query
-     * @param jsonPathAlias new json path alias in the scenario scope
-     */
+
     void storeJsonPath(String jsonPath, String jsonPathAlias){
         Assert.notNull(jsonPath);
         Assert.isTrue(!jsonPath.isEmpty());
@@ -289,11 +287,26 @@ abstract class AbstractStepDefinitionConsumer {
 
         Object pathValue = getJsonPath(jsonPath);
         scenarioScope.getJsonPaths().put(jsonPathAlias, pathValue);
-        
+
         String scenarioScopeValue = new String();
         scenarioScopeValue =   pathValue.toString();
         System.out.print(scenarioScopeValue);
 
+        
+    }
+    
+    void storeNodeByJsonPath(String jsonPath, String jsonPathAlias){
+
+        Object pathValue = getJsonPath(jsonPath);
+        scenarioScope.getJsonPaths().put(jsonPathAlias, pathValue);
+
+        String scenarioScopeValue = pathValue.toString();
+        Pattern pattern = Pattern.compile("\"(.*?)\""); 
+        Matcher matcher = pattern.matcher(scenarioScopeValue); 
+        if (matcher.find()) 
+        { 
+        	scenarioScopeValue = matcher.group(1); 
+        } 
         
     }
 
@@ -335,7 +348,6 @@ abstract class AbstractStepDefinitionConsumer {
 
         ReadContext ctx = getBodyDocument();
         Object pathValue = ctx.read(jsonPath);
-
         Assert.notNull(pathValue);
         String pathString = new String();
         pathString = pathValue.toString();

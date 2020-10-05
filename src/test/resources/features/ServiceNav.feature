@@ -44,8 +44,8 @@ Examples:
 |URI										 |DEVICE_CATEGORY|DEVICE_MANUFACTURER|DEVICE_MODEL|DEVICE_TYPE  |
 |https://qro-microfwk-silo-web.clarovideo.net|web			 |web			     |web		  |web		    |
 
-
-Scenario Outline: #2 Se invoca al servicio /services/nav/ Se obtienen nodos y se realiza el llamado a CMS level usando los nodos
+@current
+Scenario Outline: #2 Valido en cms/level los nodos obtenidos de service/nav
 
 Given el Endpoint <URI>
 	When Cuando Realizo GET de /services/nav/data 
@@ -60,16 +60,26 @@ Given el Endpoint <URI>
 		|authpt				|12e4i8l6a581a					  |
 		|HKS				|(e201a2e2e72ffe25d066e13c2f175d75|
 		|tenant_code		|clarovideo						  |
-		|type				|epg							  |
-		
-	Then obtengo codigo de respuesta 200
-	And almaceno la respuesta de .response.nodes como Nodos en variable de escenario
-	And Valido listado de Nodos Almacenados en variable: Nodos
-		|device_category	|<DEVICE_CATEGORY>				  |
-		|device_model		|<DEVICE_MODEL>			  		  |
-		|device_type		|<DEVICE_TYPE>			          |
-		|device_manufacturer|<DEVICE_MANUFACTURER>	          |
-		
+		#|type				|epg							  |
+
+    And almaceno un nodo de nivel 1 como Nodo en variable de escenario
+	When Cuando Realizo GET de /services/cms/level
+		|device_category	|<DEVICE_CATEGORY>		   |
+		|device_model		|<DEVICE_MODEL>			   |
+		|device_type		|<DEVICE_TYPE>			   |
+		|device_manufacturer|<DEVICE_MANUFACTURER>	   |
+		|authpn				|webclient				   |
+		|authpt				|tfg1h3j4k6fd7			   |
+		|cache				|refresh				   |
+		|format				|json					   |
+		|HKS				|03nevr0ti0l7bqcufpi0o9bch3|
+		|isCacheable		|true					   |
+		|tenant_code		|clarovideo				   |
+		|type				|nav                       |
+		|node				|Nodo1              |
+		|api_version		|v5.92                     |
+		|region				|mexico                    |
+
 
 
 Examples:

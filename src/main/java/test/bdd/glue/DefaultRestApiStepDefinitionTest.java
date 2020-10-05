@@ -8,6 +8,7 @@ import test.bdd.scope.ScenarioScope;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.Assert;
 
@@ -105,6 +106,7 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 
 			url = url + "?" + resource.substring(0, resource.length() - 1);
 		}
+				
 		// Armado cuando se tiene una variable de escenario
 		else {
 			url = this.returnScenarioVariable(url);
@@ -128,13 +130,12 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 	public void get_nodes(String nodos, DataTable dt) {
 
 		List<List<String>> list = dt.asLists(String.class);
-		
-//		List<String> nodeList = new ArrayList<String>();
-//		nodeList = this.returnScenarioVariable(nodos);
-		
+
+		// List<String> nodeList = new ArrayList<String>();
+		// nodeList = this.returnScenarioVariable(nodos);
+
 		nodos = this.returnScenarioVariable(nodos);
 
-		
 		// this.request(nodos, HttpMethod.GET);
 
 	}
@@ -475,6 +476,26 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 	public void storeResponseJsonPath(String jsonPath, String jsonPathAlias) throws IOException {
 		this.storeJsonPath(jsonPath, jsonPathAlias);
 
+	}
+
+	/**
+	 * Guardo la respuesta en el una variable de escenario
+	 */
+	@Then("^almaceno un nodo de nivel (.*) como Nodo en variable de escenario$")
+	public void storeNodesInResponseJsonPath(String level) throws IOException {
+		switch (level) {
+		case "1":
+			this.storeNodeByJsonPath("$..nodes[?(@.level == 1)].code", "Nodo1");
+			break;
+
+		case "2":
+			this.storeNodeByJsonPath("$..childs[?(@.level == 2)].code", "Nodo2");
+			break;
+
+		case "3":
+			this.storeNodeByJsonPath("$..childs[?(@.level == 3)].code", "Nodo3");
+			break;
+		}
 	}
 
 	/**
