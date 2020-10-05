@@ -76,7 +76,7 @@ Given el Endpoint <URI>
 		|isCacheable		|true					   |
 		|tenant_code		|clarovideo				   |
 		|type				|nav                       |
-		|node				|Nodo1              |
+		|nodoVariable		|Nodo1         			   |
 		|api_version		|v5.92                     |
 		|region				|mexico                    |
 

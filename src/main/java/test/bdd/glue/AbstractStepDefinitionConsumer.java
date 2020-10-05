@@ -298,8 +298,7 @@ abstract class AbstractStepDefinitionConsumer {
     void storeNodeByJsonPath(String jsonPath, String jsonPathAlias){
 
         Object pathValue = getJsonPath(jsonPath);
-        scenarioScope.getJsonPaths().put(jsonPathAlias, pathValue);
-
+      
         String scenarioScopeValue = pathValue.toString();
         Pattern pattern = Pattern.compile("\"(.*?)\""); 
         Matcher matcher = pattern.matcher(scenarioScopeValue); 
@@ -307,7 +306,8 @@ abstract class AbstractStepDefinitionConsumer {
         { 
         	scenarioScopeValue = matcher.group(1); 
         } 
-        
+        scenarioScope.getJsonPaths().put(jsonPathAlias, scenarioScopeValue);
+
     }
 
     /**

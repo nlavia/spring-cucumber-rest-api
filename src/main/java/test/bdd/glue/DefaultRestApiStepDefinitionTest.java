@@ -100,7 +100,14 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 		if (!url.equals("UrlVariable")) {
 
 			for (int i = 0; i < list.size(); i++) {
-
+				
+				if (list.get(i).get(0).equals("nodoVariable"))
+				{
+					
+					String node = this.returnScenarioVariable(list.get(i).get(1));
+					resource = resource + "nodo" + "=" + node + "&";
+					i++;
+				}	
 				resource = resource + list.get(i).get(0) + "=" + list.get(i).get(1) + "&";
 			}
 
@@ -126,19 +133,6 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 
 	}
 
-	@When("^Valido listado de Nodos Almacenados en variable: (.*)$")
-	public void get_nodes(String nodos, DataTable dt) {
-
-		List<List<String>> list = dt.asLists(String.class);
-
-		// List<String> nodeList = new ArrayList<String>();
-		// nodeList = this.returnScenarioVariable(nodos);
-
-		nodos = this.returnScenarioVariable(nodos);
-
-		// this.request(nodos, HttpMethod.GET);
-
-	}
 
 	// @When("^Realizo GET de /services/nav/data con parametros$")
 	// public void co(DataTable parameters) {
@@ -172,78 +166,6 @@ public class DefaultRestApiStepDefinitionTest extends AbstractStepDefinitionCons
 	//
 	// }
 
-	// @When("^Realizo GET de /services/cms/level con parametros$")
-	// public void get_cms_level_with_params(DataTable parameters) {
-	//
-	// String resource = new String();
-	// resource = "/services/cms/level?";
-	//
-	// List<Map<String, String>> list = parameters.asMaps(String.class,
-	// String.class);
-	// resource = resource + "device_category" + "=" +
-	// list.get(0).get("device_category");
-	// resource = resource + "&" + "device_model" + "=" +
-	// list.get(0).get("device_model");
-	// resource = resource + "&" + "device_type" + "=" +
-	// list.get(0).get("device_type");
-	// resource = resource + "&" + "device_manufacturer" + "=" +
-	// list.get(0).get("device_manufacturer");
-	// resource = resource + "&" + "authpn" + "=" + list.get(0).get("authpn");
-	// resource = resource + "&" + "authpt" + "=" + list.get(0).get("authpt");
-	// resource = resource + "&" + "cache" + "=" + list.get(0).get("cache");
-	// resource = resource + "&" + "format" + "=" + list.get(0).get("format");
-	// resource = resource + "&" + "HKS" + "=" + list.get(0).get("HKS");
-	// resource = resource + "&" + "isCacheable" + "=" +
-	// list.get(0).get("isCacheable");
-	// resource = resource + "&" + "tenant_code" + "=" +
-	// list.get(0).get("tenant_code");
-	// resource = resource + "&" + "type" + "=" + list.get(0).get("type");
-	// resource = resource + "&" + "node" + "=" + list.get(0).get("node");
-	// resource = resource + "&" + "api_version" + "=" +
-	// list.get(0).get("api_version");
-	// resource = resource + "&" + "region" + "=" + list.get(0).get("region");
-	// this.request(resource, HttpMethod.GET);
-	//
-	// }
-
-	// @When("^Realizo GET de /services/cms/carrousel con parametros$")
-	// public void get_cms_carrusel_with_params(DataTable parameters) {
-	//
-	// String variable = new String();
-	// String resource = new String();
-	// resource = "/services/cms/carrousel?";
-	// List<Map<String, String>> list = parameters.asMaps(String.class,
-	// String.class);
-	// resource = resource + "device_category" + "=" +
-	// list.get(0).get("device_category");
-	// resource = resource + "&" + "device_model" + "=" +
-	// list.get(0).get("device_model");
-	// resource = resource + "&" + "device_type" + "=" +
-	// list.get(0).get("device_type");
-	// resource = resource + "&" + "device_manufacturer" + "=" +
-	// list.get(0).get("device_manufacturer");
-	// resource = resource + "&" + "order_way" + "=" +
-	// list.get(0).get("order_way");
-	// resource = resource + "&" + "order_id" + "=" +
-	// list.get(0).get("order_id");
-	//
-	// variable = this.returnScenarioVariable("url");
-	// variable = variable.substring(variable.indexOf("filter_id") + 10);
-	// variable = variable.substring(0, variable.indexOf("&"));
-	// resource = resource + "&" + "filter_id" + "=" + variable;
-	//
-	// // resource = resource + "&" + "filter_id" + "=" +
-	// // list.get(0).get("filter_id");
-	// resource = resource + "&" + "region" + "=" + list.get(0).get("region");
-	// resource = resource + "&" + "format" + "=" + list.get(0).get("format");
-	// resource = resource + "&" + "authpn" + "=" + list.get(0).get("authpn");
-	// resource = resource + "&" + "authpt" + "=" + list.get(0).get("authpt");
-	// resource = resource + "&" + "api_version" + "=" +
-	// list.get(0).get("api_version");
-	// resource = resource + "&" + "quantity" + "=" +
-	// list.get(0).get("quantity");
-	// this.request(resource, HttpMethod.GET);
-	// }
 
 	/**
 	 * Perform an HTTP POST request. It supposes that a body exists, i.e that
